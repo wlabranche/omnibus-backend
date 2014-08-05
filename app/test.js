@@ -1,17 +1,19 @@
-var chai = require( 'chai' );
-var expect = chai.expect;
+'use strict';
+
 var request = require( 'request' );
 var rewire = require( 'rewire' );
+var chai = require( 'chai' );
+var expect = chai.expect;
 
-describe( "Express application", function () {
-  it( "Should not explode", function () {
+describe( 'Express application', function () {
+  it( 'Should not explode', function () {
     expect( function () {
       require( './' );
     }).to.not.throw();
   });
 });
 
-describe( "Fallback routes", function () {
+describe( 'Fallback routes', function () {
   var app;
   var server;
 
@@ -26,20 +28,20 @@ describe( "Fallback routes", function () {
     server.close();
   });
 
-  it( "In development, should 404 with error info", function ( done ) {
+  it( 'In development, should 404 with error info', function ( done ) {
     startInEnv();
-    request( "http://localhost:3000/nope", function ( err, res, body ) {
+    request( 'http://localhost:3000/nope', function ( err, res, body ) {
       var json = JSON.parse( body );
       expect( res.statusCode ).to.equal( 404 );
-      expect( json.err ).to.equal( "Error: Not Found" );
+      expect( json.err ).to.equal( 'Error: Not Found' );
       expect( json.stackTrace ).to.exist;
       done();
     });
   });
 
-  it( "In production, should 404 with error info", function ( done ) {
+  it( 'In production, should 404 without error info', function ( done ) {
     startInEnv( 'production' );
-    request( "http://localhost:3000/nope", function ( err, res, body ) {
+    request( 'http://localhost:3000/nope', function ( err, res, body ) {
       var json = JSON.parse( body );
       expect( json.err ).to.not.exist;
       expect( json.stackTrace ).to.not.exist;
