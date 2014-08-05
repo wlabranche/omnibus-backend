@@ -19,7 +19,13 @@
     "request": "^2.39.0",
     "static-favicon": "~1.0.0",
     "nyt-congress-node": "omnibus-app/nyt-congress-node",
-    "gulp-istanbul": "^0.2.1"
+    "gulp-istanbul": "^0.2.1",
+    "gulp-mocha": "^0.5.2",
+    "mocha": "^1.21.3",
+    "mocha-lcov-reporter": "0.0.1",
+    "rewire": "^2.1.0",
+    "sinon": "^1.10.3",
+    "sinon-chai": "^2.5.0"
   },
   "devDependencies": {
     "chai": "^1.9.1",
