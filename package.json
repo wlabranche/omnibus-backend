@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "gulp test",
+    "postinstall": "gulp test",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "repository": "https://github.com/omnibus-app/omnibus-backend",
@@ -18,7 +18,17 @@
     "morgan": "~1.0.0",
     "request": "^2.39.0",
     "static-favicon": "~1.0.0",
-    "nyt-congress-node": "omnibus-app/nyt-congress-node"
+    "gulp": "^3.8.7",
+    "nyt-congress-node": "omnibus-app/nyt-congress-node",
+    "gulp-istanbul": "^0.2.1",
+    "gulp-mocha": "^0.5.2",
+    "mocha": "^1.21.3",
+    "mocha-lcov-reporter": "0.0.1",
+    "rewire": "^2.1.0",
+    "sinon": "^1.10.3",
+    "sinon-chai": "^2.5.0",
+    "chai": "^1.9.1",
+    "coveralls": "^2.11.1"
   },
   "devDependencies": {
     "chai": "^1.9.1",
