@@ -18,7 +18,8 @@
     "morgan": "~1.0.0",
     "request": "^2.39.0",
     "static-favicon": "~1.0.0",
-    "nyt-congress-node": "omnibus-app/nyt-congress-node"
+    "nyt-congress-node": "omnibus-app/nyt-congress-node",
+    "gulp-istanbul": "^0.2.1"
   },
   "devDependencies": {
     "chai": "^1.9.1",
