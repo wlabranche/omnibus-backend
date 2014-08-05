@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require( 'express' );
 var path = require( 'path' );
 var favicon = require( 'static-favicon' );
@@ -39,7 +41,6 @@ app.use( function ( req, res, next ) {
 // development error handler
 // will print stacktrace
 if ( app.get( 'env' ) === 'development' ) {
-  console.log("IN DEV");
   app.use( function ( err, req, res, next ) {
     res.json( err.status, { err: err.toString(), stackTrace: err.stack.toString() });
   });
@@ -50,6 +51,5 @@ if ( app.get( 'env' ) === 'development' ) {
 app.use( function ( err, req, res, next ) {
   res.json( err.status );
 });
-
 
 module.exports = app;

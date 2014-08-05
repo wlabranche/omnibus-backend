@@ -1,3 +1,5 @@
+'use strict';
+
 var chai = require( 'chai' );
 var request = require( 'request' );
 var sinon = require( 'sinon' );
@@ -8,7 +10,7 @@ var expect = chai.expect;
 chai.use( sinonChai );
 
 var congressStub = ( function () {
-  var Congress = require( 'nyt-congress-node' )
+  var Congress = require( 'nyt-congress-node' );
   return function () {
     return sinon.stub( new Congress( 'API-KEY' ) );
   };
@@ -41,9 +43,9 @@ describe( 'Bills API', function () {
     server.close();
   });
 
-  describe( "GET /api/bills/:id", function () {
+  describe( 'GET /api/bills/:id', function () {
 
-    it( "Should serve GET requests to /api/bills/:id", function ( done ) {
+    it( 'Should serve GET requests to /api/bills/:id', function ( done ) {
       request( 'http://localhost:3000/api/bills/123', function ( err, resp, body ) {
         expect( err ).to.not.exist;
         expect( resp.statusCode ).to.equal( 200 );
@@ -51,7 +53,7 @@ describe( 'Bills API', function () {
       });
     });
 
-    it( "Should delegate to Congress::billDetails", function ( done ) {
+    it( 'Should delegate to Congress::billDetails', function ( done ) {
       request( 'http://localhost:3000/api/bills/123', function ( err, resp, body ) {
         expect( client.billDetails ).to.have.been.called;
         done();
