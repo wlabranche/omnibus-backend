@@ -127,7 +127,8 @@ if [ -e "$DEPLOYMENT_TARGET/bower.json" ]; then
   cd - > /dev/null
 fi
 
-# 5. Run gulp / grunt-cli
+#Gulp is failing here
+# 5. Run gulp 
 # if [ -e "$DEPLOYMENT_TARGET/gulpfile.js" ]; then
 #   cd "$DEPLOYMENT_TARGET"
 #   eval $NPM_CMD install gulp
