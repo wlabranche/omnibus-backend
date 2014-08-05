@@ -5,12 +5,8 @@ var logger = require( 'morgan' );
 var cookieParser = require( 'cookie-parser' );
 var bodyParser = require( 'body-parser' );
 
-var routes = require( './routes/index' );
-
-// var bills = require( './routes/bills' )
-
 var api = {
-  bills: require( './routes/bills' )
+  bills: require( '../routes/bills' ),
 };
 
 var app = express();
@@ -26,13 +22,10 @@ app.use( bodyParser.urlencoded() );
 app.use( cookieParser() );
 app.use( express.static( path.join( __dirname, 'public' ) ));
 
-app.use( '/', routes);
-
 // add routing for each resource defined in our api
 Object.keys( api ).forEach( function ( resource ) {
   app.use( '/api/' + resource, api[resource] );
 });
-
 
 /// catch 404 and forwarding to error handler
 app.use( function ( req, res, next ) {
@@ -45,24 +38,17 @@ app.use( function ( req, res, next ) {
 
 // development error handler
 // will print stacktrace
-if (app.get( 'env' ) === 'development' ) {
+if ( app.get( 'env' ) === 'development' ) {
+  console.log("IN DEV");
   app.use( function ( err, req, res, next ) {
-    res.status( err.status || 500 );
-    res.render( 'error', {
-      message: err.message,
-      error: err
-    });
+    res.json( err.status, { err: err.toString(), stackTrace: err.stack.toString() });
   });
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use( function ( err, req, res, next ) {
-  res.status( err.status || 500);
-  res.render( 'error', {
-    message: err.message,
-    error: {}
-  });
+  res.json( err.status );
 });
 
 
