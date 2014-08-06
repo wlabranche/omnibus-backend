@@ -21,7 +21,6 @@
     "nyt-congress-node": "omnibus-app/nyt-congress-node",
     "request": "^2.39.0",
     "gulp": "^3.8.7",
-    "nyt-congress-node": "omnibus-app/nyt-congress-node",
     "gulp-istanbul": "^0.2.1",
     "gulp-mocha": "^0.5.2",
     "mocha": "^1.21.3",
@@ -30,7 +29,7 @@
     "sinon": "^1.10.3",
     "sinon-chai": "^2.5.0",
     "chai": "^1.9.1",
-    "coveralls": "^2.11.1"
+    "coveralls": "^2.11.1",
     "static-favicon": "~1.0.0"
   },
   "devDependencies": {
