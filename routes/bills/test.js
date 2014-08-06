@@ -5,14 +5,29 @@ var request = require( 'request' );
 var sinon = require( 'sinon' );
 var sinonChai = require( 'sinon-chai' );
 var rewire = require( 'rewire' );
+var Promise = require( 'bluebird' );
 var express = require( 'express' );
 var expect = chai.expect;
 chai.use( sinonChai );
 
-var congressStub = ( function () {
+var congressSpy = ( function () {
   var Congress = require( 'nyt-congress-node' );
+
+  // promisified prototype methods
+  Object.keys( Congress.prototype ).forEach( function ( method ) {
+    if ( typeof Congress.prototype[method] === 'function' ) {
+      Congress.prototype[method] = sinon.spy( function() {
+        return new Promise( function ( resolve ) {
+          setTimeout( function() {
+            resolve();
+          }, 5 );
+        });
+      });
+    }
+  });
+
   return function () {
-    return sinon.stub( new Congress( 'API-KEY' ) );
+    return new Congress( 'API_KEY' );
   };
 })();
 
@@ -25,7 +40,7 @@ describe( 'Bills API', function () {
 
   beforeEach( function () {
     // create a stubbed version of the NYT API wrapper
-    client = congressStub();
+    client = congressSpy();
     // get the bills router
     router = rewire( './' );
     // rewire the bills router to use the API stub
