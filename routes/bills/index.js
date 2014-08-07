@@ -3,16 +3,24 @@
 var express = require('express');
 var router = express.Router();
 
-var Congress = require( 'nyt-congress-node' );
-
-var client = new Congress( process.env.NYT_CONGRESS_KEY );
+var amendments = require( './amendments' );
+var details = require( './details' );
+var subjects = require( './subjects' );
 
 router.get( '/:id', function ( req, res ) {
-  var id = req.params.id.split( '-' );
-  client.billDetails({
-    billId: id[1],
-    congressNumber: id[0]
-  }).then( function( data ) {
+  details( req.params.id ).then( function ( data ) {
+    res.json( data );
+  });
+});
+
+router.get( '/:id/amendments', function ( req, res ) {
+  amendments( req.params.id ).then( function ( data ) {
+    res.json( data );
+  });
+});
+
+router.get( '/:id/subjects', function ( req, res ) {
+  subjects( req.params.id ).then( function ( data ) {
     res.json( data );
   });
 });
