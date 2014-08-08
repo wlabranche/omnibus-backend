@@ -1,4 +1,4 @@
-// 'use strict';
+'use strict';
 
 var request = require( 'request' );
 var chai = require( 'chai' );
@@ -26,7 +26,6 @@ var paramInterpolate = function ( str, obj ) {
 
 module.exports = function ( opts ) {
 
-
   var mock = nock( opts.nockRoot )
     .filteringPath( /api-key=[^&]*/g, 'api-key=test' )
     .get( opts.nockPath )
@@ -51,7 +50,6 @@ module.exports = function ( opts ) {
 
       it( 'Should serve GET requests to /api' + opts.appPath, function ( done ) {
         var url = paramInterpolate( 'http://localhost:3000/api' + opts.appPath, replacer );
-        console.log( url );
         request( url, function ( err, resp, body ) {
           expect( err ).to.not.exist;
           expect( resp.statusCode ).to.equal( 200 );
@@ -63,4 +61,4 @@ module.exports = function ( opts ) {
 
   });
 
-}
+};
