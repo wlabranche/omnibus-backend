@@ -2,13 +2,13 @@
 
 var redisConnect = [
   process.env.REDIS_PORT,
-  'omnibus.redis.cache.windows.net'
+  process.env.REDIS_URL
 ];
 
 var Promise = require( 'bluebird' ),
     redis = require( 'redis' ),
     nyt = require('./bills'),
-    client = redis.createClient(process.env, redisConnect);
+    client = redis.createClient.apply(redis, redisConnect);
 
 var get = Promise.promisify( client.get, client ),
     set = Promise.promisify( client.set, client );

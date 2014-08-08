@@ -1,5 +1,7 @@
 language: node_js
 node_js:
   - "0.10"
+env:
+  - REDIS_URL='omnibus.redis.cache.windows.net' REDIS_PORT='6379'
 after_script:
   - npm run coveralls
