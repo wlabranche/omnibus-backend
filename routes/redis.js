@@ -11,8 +11,7 @@ var Promise = require( 'bluebird' ),
     client = redis.createClient.apply(redis, redisConnect);
 
 var get = Promise.promisify( client.get, client ),
-    set = Promise.promisify( client.set, client ),
-    flush = Promise.promisify( client.flushdb, client);
+    set = Promise.promisify( client.set, client );
 
 client.auth(process.env.REDIS_KEY);
 
