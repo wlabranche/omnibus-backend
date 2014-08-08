@@ -7,28 +7,29 @@ var amendments = require( './amendments' );
 var details = require( './details' );
 var subjects = require( './subjects' );
 var votes = require( './votes' );
-var redis = require( '../redis.js' );
+
+var cacheInterceptor = require( '../interceptor.js' );
 
 router.get( '/:id', function ( req, res ) {
-  redis( req.params.id, details ).then( function ( data ) {
+  cacheInterceptor( req, details ).then( function ( data ) {
     res.json( data );
   });
 });
 
 router.get( '/:id/amendments', function ( req, res ) {
-  redis( req.params.id, amendments ).then( function ( data ) {
+  cacheInterceptor( req, amendments ).then( function ( data ) {
     res.json( data );
   });
 });
 
 router.get( '/:id/subjects', function ( req, res ) {
-  redis( req.params.id, subjects ).then( function ( data ) {
+  cacheInterceptor( req, subjects ).then( function ( data ) {
     res.json( data );
   });
 });
 
 router.get( '/:id/votes', function ( req, res ) {
-  votes( req.params.id ).then( function ( data ) {
+  cacheInterceptor( req, votes ).then( function ( data ) {
     res.json( data );
   });
 });
