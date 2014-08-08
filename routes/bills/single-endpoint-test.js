@@ -30,11 +30,9 @@ module.exports = function ( opts ) {
   var mock = nock( opts.nockRoot )
     .filteringPath( /api-key=[^&]*/g, 'api-key=test' )
     .get( opts.nockPath )
-    .delayConnection( 100 )
     .reply( 200 );
 
   describe( opts.appPath + ' endpoint', function() {
-
 
     var server;
     var app;
