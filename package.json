@@ -27,6 +27,7 @@
     "mocha": "^1.21.3",
     "mocha-lcov-reporter": "0.0.1",
     "morgan": "~1.0.0",
+    "nock": "^0.44.0",
     "nyt-congress-node": "omnibus-app/nyt-congress-node",
     "request": "^2.39.0",
     "rewire": "^2.1.0",
