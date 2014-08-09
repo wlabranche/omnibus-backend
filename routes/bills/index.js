@@ -7,8 +7,15 @@ var amendments = require( './amendments' );
 var details = require( './details' );
 var subjects = require( './subjects' );
 var votes = require( './votes' );
+var search = require( './search' );
 
 var cacheInterceptor = require( '../interceptor.js' );
+
+router.get( '/search', function ( req, res ) {
+  search( req, votes ).then( function ( data ) {
+    res.json( data );
+  });
+});
 
 router.get( '/:id', function ( req, res ) {
   cacheInterceptor( req, details ).then( function ( data ) {

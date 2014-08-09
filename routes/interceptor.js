@@ -6,6 +6,8 @@ var redisConfig = {
   key: process.env.REDIS_KEY || null
 };
 
+console.log( redisConfig );
+
 var client, get, set;
 
 var interpolateParams = require( '../modules/interpolate-params' );
