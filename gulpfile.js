@@ -31,7 +31,9 @@ gulp.task('test', function(cb){
     ])
     .pipe( mocha({ reporter: 'spec' }) )
     .pipe( istanbul.writeReports() )
-    .on( 'end', cb );
+    .on( 'end', function() {
+      process.exit( 0 );
+    });
   });
 });
 
