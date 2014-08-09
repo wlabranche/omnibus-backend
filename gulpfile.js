@@ -4,18 +4,16 @@ var gulp = require( 'gulp' );
 
 var jshint = require( 'gulp-jshint' );
 var stylish = require( 'jshint-stylish' );
-
 var mocha = require( 'gulp-mocha' );
 var istanbul = require( 'gulp-istanbul' );
 var lcov = require( 'mocha-lcov-reporter' );
 
 gulp.task('jshint', function ( cb ) {
   gulp.src([
-    './!(coverage)+!(node_modules)+(*)/**/*.js'
+    './!(coverage|node_modules)/**/*.js'
   ])
   .pipe( jshint() )
-  .pipe( jshint.reporter( stylish ) )
-  .pipe( jshint.reporter( 'fail' ) );
+  .pipe( jshint.reporter( stylish ) );
 });
 
 gulp.task('test', function(cb){

@@ -1,7 +1,10 @@
 language: node_js
 node_js:
-  - "0.10"
+- '0.10'
 env:
+  matrix:
   - REDIS_URL='omnibus.redis.cache.windows.net' REDIS_PORT='6379'
+  global:
+    secure: G0E2vdya/uGKw5jF2B77aA++zFtRtP8awhulKDoJB57w0q+bAT7L7EK/n6+zRYGMMGTFaXTseJkURQV/yNXi76Cxjf3WnjwPpRAeST9aI30VCIZouTchpojlVS2Y/vgG0O3YgtuD3N98lXfSSBeqjVhw15w4BbdJ9dVRPI4fh6s=
 after_script:
-  - npm run coveralls
+- npm run coveralls
