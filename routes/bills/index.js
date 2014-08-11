@@ -8,11 +8,20 @@ var details = require( './details' );
 var subjects = require( './subjects' );
 var votes = require( './votes' );
 var search = require( './search' );
+var versions = require( './versions' );
 
 var cacheInterceptor = require( '../interceptor.js' );
 
+// integrate interceptor
 router.get( '/search', function ( req, res ) {
   search( req, votes ).then( function ( data ) {
+    res.json( data );
+  });
+});
+
+// integrate interceptor
+router.get( '/:id/versions', function ( req, res ) {
+  versions( req ).then( function ( data ) {
     res.json( data );
   });
 });

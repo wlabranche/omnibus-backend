@@ -15,7 +15,6 @@ var paramInterpolate = function ( str, obj ) {
   });
 };
 
-
 // pass data like:
 // {
 //    nockRoot: String,
@@ -25,8 +24,7 @@ var paramInterpolate = function ( str, obj ) {
 // }
 
 module.exports = function ( opts ) {
-
-  var mock = nock( opts.nockRoot )
+  nock( opts.nockRoot )
     .filteringPath( /api-key=[^&]*/g, 'api-key=test' )
     .get( opts.nockPath )
     .reply( 200 );
