@@ -8,7 +8,5 @@ sunlightApi.init( SUNLIGHT );
 
 module.exports = function ( req ) {
   var query = req.query.q;
-  var d = sunlightApi.billsSearch().search( query );
-  console.log( d.getEndpoint() );
-  return d.call();
+  return sunlightApi.billsSearch().search( query ).call();
 };
