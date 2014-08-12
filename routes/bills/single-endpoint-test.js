@@ -24,6 +24,7 @@ var paramInterpolate = function ( str, obj ) {
 // }
 
 module.exports = function ( opts ) {
+
   nock( opts.nockRoot )
     .filteringPath( /api-key=[^&]*/g, 'api-key=test' )
     .get( opts.nockPath )
