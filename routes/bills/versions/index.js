@@ -17,12 +17,11 @@ module.exports = function( req ) {
   var bill = parseBill( req.params.id );
   var sunlightResp;
   var gpoResp;
-  var r = sunlightApi
+  return sunlightApi
     .bills()
     .filter( 'bill_id', bill.sunlightId )
-    .fields( 'versions' );
-  console.log( r.getEndpoint() );
-    return r.call()
+    .fields( 'versions' )
+    .call()
     .then( function ( resp ) {
       var sunlightResp = JSON.parse( resp ).results[0].versions;
       return Promise.all( sunlightResp.map( getVersion ) ).then( function ( gpoVersions ) {

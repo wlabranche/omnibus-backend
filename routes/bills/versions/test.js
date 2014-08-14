@@ -29,14 +29,13 @@ var versionEndpointTest = function ( opts ) {
     .filteringPath( /api-key=[^&]*/g, 'api-key=test' )
     .get( opts.nockPath )
     .reply( 200, {
-      results: [
-        { versions: [
+      results: [{ versions:
+        [
           { urls: { html: 'http://gpo.fake.gov/test' } },
           { urls: { html: 'http://gpo.fake.gov/test' } },
-          { urls: { html: 'http://gpo.fake.gov/test' } },
-          ]
-        }
-      ]
+          { urls: { html: 'http://gpo.fake.gov/test' } }
+        ]
+      }]
     });
 
   nock( 'http://gpo.fake.gov' )
