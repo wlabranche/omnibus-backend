@@ -19,8 +19,8 @@ module.exports = function ( req ) {
   var firstCall = sunlightApi
     .bills()
     .filter( 'congress', req.params.id )
-    .filter( 'history.enacted', 'true' )
-    .filter( 'per_page', '50' );
+    .filter( 'history.enacted', true )
+    .filter( 'per_page', PER_PAGE );
 
   return firstCall.call().then( function ( response ) {
     data.push( response );

@@ -77,6 +77,6 @@ var versionEndpointTest = function ( opts ) {
 
 versionEndpointTest({
   nockRoot: 'https://congress.api.sunlightfoundation.com',
-  nockPath: '/bills/?bill_id=hr2397-113&fields=versions&apikey=test&bill_id=hr2397-113&fields=versions&apikey=test',
+  nockPath: '/bills/?bill_id=hr2397-113&fields=versions&apikey=test&bill_id=hr2397-113&fields=versions',
   appPath: '/bills/:id/versions'
 });
