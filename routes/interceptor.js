@@ -6,7 +6,7 @@ var redisConfig = {
   key: process.env.REDIS_KEY || null
 };
 
-var client, get, set, del;
+var client, get, set, del, flush;
 
 var interpolateParams = require( '../modules/interpolate-params' );
 var redis = require( 'redis' );
@@ -19,6 +19,8 @@ if ( redisConfig.port && redisConfig.url && redisConfig.key ) {
   get = Promise.promisify( client.get, client );
   set = Promise.promisify( client.set, client );
   del = Promise.promisify( client.del,  client );
+  flush = Promise.promisify( client.flushdb, client);
+
 
   client.auth( redisConfig.key );
   client.on( 'error', function ( error ) {
@@ -30,7 +32,6 @@ var cacheInterceptor = function ( req, fallback ) {
   if ( !client || req.query.force ) {
     return fallback( req ); // returns promise
   }
-
   var path = interpolateParams( req.path, req.params );
 
   return tryCache( path )
@@ -77,13 +78,7 @@ var tryMeta = function ( key ) {
 
 var setMeta = function ( key, meta ){
   key = queryParse( key );
-  del( key )
-    .then(function(data){
-      set( key, meta )
-        .catch( function( error ) {
-          console.log( error );
-        });  
-    })
+  set( key, meta )
     .catch(function(err){
       console.log(err);
     });
