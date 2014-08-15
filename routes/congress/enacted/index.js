@@ -29,16 +29,12 @@ module.exports = function ( req ) {
 
     var d = JSON.parse( response );
 
-    console.log( d.count );
-
     var page = 2;
     while ( count < d.count ) {
       promises.push( sunlightApi.clone( firstCall ).filter( 'page', page ) );
       page += 1;
       count += PER_PAGE;
     }
-
-    console.log( promises.length );
 
     return Promise.all( promises.map( function( query ) {
       return query.call().then( function ( response ) {
