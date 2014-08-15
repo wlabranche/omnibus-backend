@@ -10,7 +10,10 @@ var votes = require( './votes' );
 var search = require( './search' );
 var versions = require( './versions' );
 
-var cacheInterceptor = require( '../interceptor.js' );
+var cacheInterceptor = require( '../interceptor.js' ).interceptor;
+var tryMeta = require( '../interceptor.js' ).tryMeta;
+var setMeta = require( '../interceptor.js' ).setMeta;
+var buildMeta = require( '../buildMeta.js' );
 
 // integrate interceptor
 router.get( '/search', function ( req, res ) {
@@ -27,7 +30,14 @@ router.get( '/:id/versions', function ( req, res ) {
 });
 
 router.get( '/:id', function ( req, res ) {
+  var meta;
+  var metaUrl = req.url.substring(1).split('/')[0];
+  tryMeta(metaUrl)
+    .then(function(data){
+      meta = JSON.parse(data);
+    });
   cacheInterceptor( req, details ).then( function ( data ) {
+    setMeta(metaUrl, JSON.stringify(buildMeta(data, meta)));
     res.json( data );
   });
 });
