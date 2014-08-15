@@ -29,14 +29,13 @@ var versionEndpointTest = function ( opts ) {
     .filteringPath( /api-key=[^&]*/g, 'api-key=test' )
     .get( opts.nockPath )
     .reply( 200, {
-      results: [
-        { versions: [
+      results: [{ versions:
+        [
           { urls: { html: 'http://gpo.fake.gov/test' } },
           { urls: { html: 'http://gpo.fake.gov/test' } },
-          { urls: { html: 'http://gpo.fake.gov/test' } },
-          ]
-        }
-      ]
+          { urls: { html: 'http://gpo.fake.gov/test' } }
+        ]
+      }]
     });
 
   nock( 'http://gpo.fake.gov' )
@@ -78,6 +77,6 @@ var versionEndpointTest = function ( opts ) {
 
 versionEndpointTest({
   nockRoot: 'https://congress.api.sunlightfoundation.com',
-  nockPath: '/bills/?bill_id=hr2397-113&fields=versions&apikey=test&bill_id=hr2397-113&fields=versions&apikey=test',
+  nockPath: '/bills/?bill_id=hr2397-113&fields=versions&apikey=test&bill_id=hr2397-113&fields=versions',
   appPath: '/bills/:id/versions'
 });
