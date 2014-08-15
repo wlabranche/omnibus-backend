@@ -8,7 +8,7 @@ var enacted = require( './enacted' );
 var cacheInterceptor = require( '../interceptor.js' );
 
 router.get( '/:id/enacted', function ( req, res ) {
-  cacheInterceptor( req, enacted ).then( function ( data ) {
+  enacted( req ).then( function ( data ) {
     res.json( data );
   });
 });
