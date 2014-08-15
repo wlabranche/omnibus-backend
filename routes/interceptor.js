@@ -9,7 +9,6 @@ var redisConfig = {
 var client, get, set, del;
 
 var interpolateParams = require( '../modules/interpolate-params' );
-var meta = require('./metaStore.js');
 var redis = require( 'redis' );
 var Promise = require( 'bluebird' );
 
@@ -37,12 +36,10 @@ var cacheInterceptor = function ( req, fallback ) {
   return tryCache( path )
     // found in cache
     .then( function ( response ) {
-      console.log('going to redis');
       return response;
     })
     // not in cache
     .catch( function () {
-      console.log('not going to redis');
       return fallback( req ).then( function ( response ) {
         set( path, response );
         return response;
@@ -69,7 +66,6 @@ var queryParse = function( query ){
 
 var tryMeta = function ( key ) {
   key = queryParse( key );
-  // del();
   return get( key )
     .then( function( response ) {
       return response;
